@@ -6,6 +6,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Two Sum problem [(goto)](#Two-Sum-problem)
 #### [Medium](#Medium-Algorithms)
 #### [Hard](#Hard-Algorithms)
+
 ---
 ## Easy Algorithms
 ##### Two Sum problem
@@ -25,8 +26,10 @@ return null
 
 [back to up](#List-of-Content)
 
+---
 ## Medium Algorithms
 [back to up](#List-of-Content)
 
+---
 ## Hard Algorithms
 [back to up](#List-of-Content)
