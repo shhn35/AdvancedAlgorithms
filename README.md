@@ -36,8 +36,8 @@ return null
 ##### Merge k Sorted List problem
 - [Problem description and source](https://leetcode.com/problems/merge-k-sorted-lists)
 - Key concepts:
-1- Using MinHeap data structure to retrieve the min element among the head of all lists.
-2- This approach has the time complexity of O(n log k)
+1. Using MinHeap data structure to retrieve the min element among the head of all lists.
+2. This approach has the time complexity of O(n log k)
 - Solutions:
 ```ruby
 current = head = result = new ListNode
