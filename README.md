@@ -6,6 +6,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Two Sum problem [(goto)](#Two-Sum-problem)
 #### [Medium](#Medium-Algorithms)
 #### [Hard](#Hard-Algorithms)
+###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
 ---
 ## Easy Algorithms
@@ -32,4 +33,26 @@ return null
 
 ---
 ## Hard Algorithms
+##### Merge k Sorted List problem
+- [Problem description and source](https://leetcode.com/problems/merge-k-sorted-lists)
+- Key concepts:
+1- Using MinHeap data structure to retrieve the min element among the head of all lists.
+2- This approach has the time complexity of O(n log k)
+- Solutions:
+```ruby
+current = head = result = new ListNode
+pq = new PriorityQueue
+For list in lists
+  If list is not null
+    pq.offer(list)
+If pq.size() == 0
+  return null;
+while(qp.size() >0 )
+  current = pq.poll()
+  Result.next = current
+  result = result.next
+  if(current.next != null)
+    pq.offer(current.next)
+return head.next
+```
 [back to up](#List-of-Content)
