@@ -29,10 +29,13 @@ public class MergeKSortedLists {
 
         while(pq.size() > 0){
             // get the min elements among current k elements in MeanHeap
+//            current = pq.poll();
+//            result.next = new ListNode() ;
+//            result = result.next ;
+//            result.val = current.val;
             current = pq.poll();
-            result.next = new ListNode() ;
-            result = result.next ;
-            result.val = current.val;
+            result.next = current;
+            result = result.next;
 
             // put the next element of the corresponding list to MeanHeap
             if(current.next != null)
