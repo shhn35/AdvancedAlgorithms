@@ -34,12 +34,12 @@ return null
 - [Problem description and source](https://leetcode.com/problems/3sum/)
 - Key concepts:
 1. The main key is to sort the input array once in O(n log n) to have a sorted array.
-2. By having a sorted array, it is possible to use the idea of having two pointers of left and right to scrool the whole array in each iteration of main loop.
-3. Finally it is colved in O(n^2)
-4. The main challenges rise with the constraint of eliminating the repeatetive elements. So, be careful with the indexes when working with arrays!!!
+2. By having a sorted array, it is possible to use the idea of having two pointers of left and right to scroll the whole array in each iteration of the main loop.
+3. Finally it is solved in O(n^2)
+4. The main challenges rise with the constraint of eliminating the repetitive elements. So, be careful with the indexes when working with arrays!!!
+
 - Solutions:
 ```ruby
-Get an aux memory as HashMap (pairs)
 prevElement = 0, left = 0, right = 0
 For i = 0 to arr.size - 2
   if (i>0 and prevElement == arr[i])
