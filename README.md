@@ -4,6 +4,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ## List of Content
 #### [Easy](#Easy-Algorithms)
 ###### Two Sum problem [(goto)](#Two-Sum-problem)
+###### Reverse Integer problem [(goto)](#Reverse-Integer)
 #### [Medium](#Medium-Algorithms)
 ###### Three Sum To Zero [(goto)](#Three-Sum-To-Zero-problem)
 #### [Hard](#Hard-Algorithms)
@@ -24,6 +25,32 @@ For i = 0 to arr.size
   Diff = target - arr[i]
   pair.put(diff,i)
 return null
+```
+##### Reverse Integer
+- [Problem description and source](https://leetcode.com/problems/reverse-integer/)
+- Key concepts:
+1. Get the last digit of x and by multiplying it by 10, shift it ro right properly, instead of doing the usual algorithms (i.e., 123 = 1*10^2 + 2*10^1 + 3*10^0);
+1. For checking the overflow there would be two different approaches:
+- Using long data type as the result and at the end check this value with Integer.MAX_VALUE and Integer.MIN_VALUE, if it exceed the boundary, simply return 0;
+- Detecting the situation of getting out of bound of integer as it is shown in the algorithm.
+
+- Solutions:
+```ruby
+int result = 0,digit=0;
+while(x!=0){
+  digit = x % 10;
+  x/=10;
+  // Overflow checking
+  if(Integer.MAX_VALUE / 10 < result || // for pos numbers
+    Integer.MIN_VALUE / 10 > result || // for neg numbers
+    (Integer.MAX_VALUE / 10 == result && digit>Integer.MAX_VALUE % 10) ||
+    (Integer.MIN_VALUE / 10 == result && digit<Integer.MIN_VALUE % 10))
+  {
+      return 0;
+  }
+  result = result * 10 + digit;
+}
+return result;
 ```
 
 [back to up](#List-of-Content)
