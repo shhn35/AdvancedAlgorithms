@@ -5,6 +5,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 #### [Easy](#Easy-Algorithms)
 ###### Two Sum problem [(goto)](#Two-Sum-problem)
 ###### Reverse Integer problem [(goto)](#Reverse-Integer)
+###### Remove Duplicate in Sorted Array problem [(goto)](#Remove-Duplicat-in-Sorted-Array)
 #### [Medium](#Medium-Algorithms)
 ###### Three Sum To Zero [(goto)](#Three-Sum-To-Zero-problem)
 #### [Hard](#Hard-Algorithms)
@@ -52,7 +53,25 @@ while(x!=0){
 }
 return result;
 ```
+##### Remove Duplicat in Sorted Array
+- [Problem description and source](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+- Key concepts:
+1. Just take a look at the previous element instead of looking forward to the next element for in-place operation.
+2. O(n) is the time complexity with O(1) space consumption.
 
+- Solutions:
+```ruby
+if(nums.length == 0)
+    return 0;
+int index = 1,pointer = 1;
+while(pointer < nums.length){
+    if(nums[pointer] == nums[index-1])
+        pointer++;
+    else
+        nums[index++] = nums[pointer++];
+}
+return index;
+```
 [back to up](#List-of-Content)
 
 ---
