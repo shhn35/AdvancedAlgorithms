@@ -22,6 +22,6 @@ public class MovingAverage {
         sum -= first;
         sum += val;
 
-        return sum / windowSize;
+        return sum / linkedList.size();
     }
 }
