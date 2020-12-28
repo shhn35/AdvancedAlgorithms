@@ -8,6 +8,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Remove Duplicate in Sorted Array problem [(goto)](#Remove-Duplicat-in-Sorted-Array)
 #### [Medium](#Medium-Algorithms)
 ###### Three Sum To Zero [(goto)](#Three-Sum-To-Zero-problem)
+###### Subarray Sum Equals K [(goto)](#Subarray-Sum-Equals-K)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -120,6 +121,28 @@ For i = 0 to arr.size - 2
   prevElement = arr[i]
   
 return result
+```
+
+##### Subarray Sum Equals K
+- [Problem description and source](https://leetcode.com/problems/subarray-sum-equals-k/)
+- Key concepts:
+1. The key factor here is to consider that the sum[i , j] is equal to sum[0,j] - sum[0,i-1]. With this clue, we can store the cumulative sum of all indexes in a HashMap and look for the sum - k in the hashMap.
+2. O(n) is the time complexity with O(n) space consumption.
+- Solutions:
+```ruby
+int total = 0, sum = 0;
+HashMap<Integer,Integer> preSum = new HashMap<>();
+
+preSum.put(0,1);
+
+for(int i = 0; i < nums.length; i++){
+  sum += nums[i];
+  if(preSum.containsKey(sum - k))
+    total += preSum.get(sum - k);
+    
+  preSum.put(sum,preSum.getOrDefault(sum,0) + 1);
+}
+return total;
 ```
 [back to up](#List-of-Content)
 
