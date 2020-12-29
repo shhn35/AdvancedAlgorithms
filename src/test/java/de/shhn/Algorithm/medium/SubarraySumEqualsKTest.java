@@ -12,9 +12,7 @@ public class SubarraySumEqualsKTest {
         int[] nums = {1,2,3};
         int k = 3;
         int expected = 2;
-
         int output = subarraySumEqualsK.subarraySum(nums,k);
-
         Assert.assertEquals(expected,output);
 
 
@@ -22,12 +20,7 @@ public class SubarraySumEqualsKTest {
         nums = new int[]{-1,-1,1,0,1,0};
         k = 0;
         expected = 6;
-
         output = subarraySumEqualsK.subarraySum(nums,k);
-
         Assert.assertEquals(expected,output);
-
-
-
     }
 }

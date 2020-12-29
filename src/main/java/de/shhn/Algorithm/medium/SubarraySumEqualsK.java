@@ -1,6 +1,7 @@
 package de.shhn.Algorithm.medium;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class SubarraySumEqualsK {
     public int subarraySum(int[] nums, int k) {
