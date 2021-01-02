@@ -9,6 +9,8 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 #### [Medium](#Medium-Algorithms)
 ###### Three Sum To Zero [(goto)](#Three-Sum-To-Zero-problem)
 ###### Subarray Sum Equals K [(goto)](#Subarray-Sum-Equals-K)
+###### Minimum Remove to Make Valid Parentheses [(goto)](#Minimum-Remove-to-Make-Valid-Parentheses)
+###### String Compression [(goto)](#String-Compression)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -143,6 +145,54 @@ for(int i = 0; i < nums.length; i++){
   preSum.put(sum,preSum.getOrDefault(sum,0) + 1);
 }
 return total;
+```
+##### Minimum Remove to Make Valid Parentheses
+- [Problem description and source](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/)
+- Key concepts:
+1. Storing the index of any open paranthesis in Stack instead of its character to keep track of its appearance. When reaches to a close one, pop from stack, insert open pranthesis in its index and add close one. In case of alphabet chars, add them directly to the output.
+2. O(n) is the time complexity 
+- Solutions:
+```ruby
+ for(int i = 0;i < chars.length; i++){
+    if(chars[i] == '('){
+        parans.push(out.length());
+    }
+    else if(chars[i] == ')'){
+        if(!parans.isEmpty()){
+            openParanIndex = parans.pop();
+            out = insertAtIndex(out,"(",openParanIndex);
+            out = out + chars[i];
+        }
+    }
+    else{
+        out = out + chars[i];
+    }
+}
+```
+##### String Compression
+- [Problem description and source](https://leetcode.com/problems/string-compression/)
+- Key concepts:
+1. Is to look at the prev element in the input array and keep track of its repeat.
+2. O(n) is the time complexity with O(1) space consumption.
+- Solutions:
+```ruby
+ for(int i = 0; i < chars.length; i++){
+    if(chars[i] == curr)
+        counter++;
+    else{
+        chars[index++] = curr;
+
+        if(counter > 1){
+            countChar = counter.toString().toCharArray();
+            for(int j = 0; j<countChar.length; j++){
+                chars[index++] = countChar[j];
+            }
+        }
+
+        curr = chars[i];
+        counter = 1;
+    }
+}
 ```
 [back to up](#List-of-Content)
 
