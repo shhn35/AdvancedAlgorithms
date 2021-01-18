@@ -11,6 +11,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Subarray Sum Equals K [(goto)](#Subarray-Sum-Equals-K)
 ###### Minimum Remove to Make Valid Parentheses [(goto)](#Minimum-Remove-to-Make-Valid-Parentheses)
 ###### String Compression [(goto)](#String-Compression)
+###### Search in Rotated Sorted Array [(goto)](#Search-in-Rotated-Sorted-Array)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -30,6 +31,8 @@ For i = 0 to arr.size
   pair.put(diff,i)
 return null
 ```
+[back to up](#List-of-Content)
+
 ##### Reverse Integer
 - [Problem description and source](https://leetcode.com/problems/reverse-integer/)
 - Key concepts:
@@ -56,6 +59,8 @@ while(x!=0){
 }
 return result;
 ```
+[back to up](#List-of-Content)
+
 ##### Remove Duplicat in Sorted Array
 - [Problem description and source](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 - Key concepts:
@@ -124,6 +129,7 @@ For i = 0 to arr.size - 2
   
 return result
 ```
+[back to up](#List-of-Content)
 
 ##### Subarray Sum Equals K
 - [Problem description and source](https://leetcode.com/problems/subarray-sum-equals-k/)
@@ -146,6 +152,8 @@ for(int i = 0; i < nums.length; i++){
 }
 return total;
 ```
+[back to up](#List-of-Content)
+
 ##### Minimum Remove to Make Valid Parentheses
 - [Problem description and source](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/)
 - Key concepts:
@@ -169,6 +177,8 @@ return total;
     }
 }
 ```
+[back to up](#List-of-Content)
+
 ##### String Compression
 - [Problem description and source](https://leetcode.com/problems/string-compression/)
 - Key concepts:
@@ -193,6 +203,40 @@ return total;
         counter = 1;
     }
 }
+```
+[back to up](#List-of-Content)
+
+##### Search in Rotated Sorted Array
+- [Problem description and source](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+- Key concepts:
+1. Behaving just like QuickSearch, but check whether the left sub-array is sorted or the right one. 
+2. O(log n) is the time complexity with O(1) space consumption.
+- Solutions:
+```ruby
+  int mid, result = -1, left = 0, right = nums.length-1;
+
+  while(left<=right){
+      mid = (left + right) / 2;
+      if(nums[mid] == target){
+          result = mid;
+          break;
+      }
+
+      // left is sorted
+      if(nums[left] <= nums[mid]){
+          if(nums[left] <= target && nums[mid] >= target )
+              right = mid - 1;
+          else
+              left = mid + 1;
+      }else{
+          // right is sorted
+          if(nums[mid] <= target && nums[right] >= target )
+              left = mid + 1;
+          else
+              right = mid - 1;
+      }
+  }
+  return result;
 ```
 [back to up](#List-of-Content)
 
