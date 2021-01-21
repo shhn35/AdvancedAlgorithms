@@ -158,24 +158,30 @@ return total;
 - [Problem description and source](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/)
 - Key concepts:
 1. Storing the index of any open paranthesis in Stack instead of its character to keep track of its appearance. When reaches to a close one, pop from stack, insert open pranthesis in its index and add close one. In case of alphabet chars, add them directly to the output.
-2. O(n) is the time complexity 
+2. Avoid using String concatanate or substring in each loop (this approach has a time complexity of O(n^2)), but instead use a char array for constructing the output and finally by using StringBuilder, form the final output.
+3. O(n) is the time complexity 
 - Solutions:
 ```ruby
- for(int i = 0;i < chars.length; i++){
-    if(chars[i] == '('){
-        parans.push(out.length());
-    }
-    else if(chars[i] == ')'){
-        if(!parans.isEmpty()){
-            openParanIndex = parans.pop();
-            out = insertAtIndex(out,"(",openParanIndex);
-            out = out + chars[i];
+for(int i=0;i<s.length();i++){
+    c = s.charAt(i);
+    if(c == '('){
+        openParan.push(index++);
+    }else if(c == ')'){
+        if(openParan.size()>0){
+            validS[index++] = c;
+            validS[openParan.pop()] = '(';            
         }
-    }
-    else{
-        out = out + chars[i];
+    }else{
+        validS[index++] = c;
     }
 }
+
+StringBuilder sb = new StringBuilder();
+for (int i=0;i<s.length();i++){
+    if(validS[i] != '\u0000')
+        sb.append(validS[i]);
+}
+return sb.toString();
 ```
 [back to up](#List-of-Content)
 
