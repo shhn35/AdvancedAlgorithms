@@ -1,33 +1,38 @@
 package de.shhn.Algorithm.medium;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class MinimumRemoveToMakeValidParentheses {
-    public String minRemoveToMakeValid(String input) {
-        Stack<Integer> parans = new Stack<>();
-        int openParanIndex = -1;
-        String out = "";
-        char[] chars = input.toCharArray();
+    public String minRemoveToMakeValid(String s) {
+        char[] validS = new char[s.length()];
+        int index = 0;
+        char c;
+        Deque<Integer> openParan = new ArrayDeque<Integer>();
 
-        for(int i = 0; i<chars.length; i++){
-            if(chars[i] == '('){
-                parans.push(out.length());
-            }
-            else if(chars[i] == ')'){
-                if(!parans.isEmpty()) {
-                    openParanIndex = parans.pop();
-                    out = insertAtIndex(out, "(", openParanIndex);
-                    out = out + chars[i];
+        for(int i=0;i<s.length();i++){
+            c = s.charAt(i);
+            if(c == '('){
+                openParan.push(index++);
+
+            }else if(c == ')'){
+                if(openParan.size()>0){
+                    validS[index++] = c;
+                    validS[openParan.pop()] = '(';
                 }
+            }else{
+                validS[index++] = c;
             }
-            else{
-                out = out + chars[i];
-            }
-        }
-        return out;
-    }
 
-    private String insertAtIndex(String s1, String s2, int index){
-        return s1.substring(0,index) + s2 + s1.substring(index,s1.length());
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i=0;i<s.length();i++){
+            if(validS[i] != '\u0000')
+                sb.append(validS[i]);
+        }
+
+        return sb.toString();
     }
 }
