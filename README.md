@@ -12,6 +12,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Minimum Remove to Make Valid Parentheses [(goto)](#Minimum-Remove-to-Make-Valid-Parentheses)
 ###### String Compression [(goto)](#String-Compression)
 ###### Search in Rotated Sorted Array [(goto)](#Search-in-Rotated-Sorted-Array)
+###### Random Pick with Weight [(goto)](#Random-Pick-with-Weight)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -246,6 +247,42 @@ return sb.toString();
 ```
 [back to up](#List-of-Content)
 
+##### Random Pick with Weight
+- [Problem description and source](https://leetcode.com/problems/random-pick-with-weight/)
+- Key concepts:
+1. Using accumulative sum to do sampling. 
+2. Generate an int random number in rage [1, max(accumulativeSum)] as a random sample
+3. Find the index by looking up into the sorted accumulativeSum array by Binary Search.
+Example: 
+input: [2,5,1,4,2]
+accumulativeSum = [2,7,8,12,14]
+sample [1,2] -> idx = 0
+sample [3,7] -> idx = 1
+sample [8,8] -> idx = 2
+sample [9,12] -> idx = 3
+sample [13,14] -> idx = 4
+2. O(n) is the time complexity. O(n) for generating accumulativeSum, but the lookup is done by O(log n)
+- Solutions:
+```ruby
+public int pickIndex() {
+    int left = 0;
+    int right = wAcc.length - 1;
+    int mid;
+    //[1 max_sampling]
+    int sample = rand.nextInt(wAcc[right]) + 1;
+    while(left<right){
+        mid = (left + right) / 2;
+        if(wAcc[mid] == sample)
+            return mid;
+        else if(wAcc[mid] < sample)
+            left = mid + 1;
+        else if(wAcc[mid] > sample)
+            right = mid;
+    }
+    return left;
+}
+```
+[back to up](#List-of-Content)
 ---
 ## Hard Algorithms
 ##### Merge k Sorted List problem
