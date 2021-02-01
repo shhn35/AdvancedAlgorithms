@@ -13,6 +13,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### String Compression [(goto)](#String-Compression)
 ###### Search in Rotated Sorted Array [(goto)](#Search-in-Rotated-Sorted-Array)
 ###### Random Pick with Weight [(goto)](#Random-Pick-with-Weight)
+###### Merge Intervals [(goto)](#Merge-Intervals)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -281,6 +282,38 @@ public int pickIndex() {
     }
     return left;
 }
+```
+[back to up](#List-of-Content)
+
+##### Merge Intervals
+- [Problem description and source](https://leetcode.com/problems/merge-intervals/)
+- Key concepts:
+1. If the input intervals would be a sorted array with respect to the first element, the a linea search from the begining would determine all overlapping intervals.
+2. Therefore, O(n log n) would be the time complexity of the solution
+Example: 
+input: [2,5,1,4,2]
+accumulativeSum = [2,7,8,12,14]
+sample [1,2] -> idx = 0
+sample [3,7] -> idx = 1
+sample [8,8] -> idx = 2
+sample [9,12] -> idx = 3
+sample [13,14] -> idx = 4
+2. O(n) is the time complexity. O(n) for generating accumulativeSum, but the lookup is done by O(log n)
+- Solutions:
+```ruby
+List<int[]> out = new ArrayList();
+Arrays.sort(intervals,(A, B)->A[0]-B[0]);
+int[] mergedElement = intervals[0];
+for(int i=1;i<intervals.length;i++){
+    if(mergedElement[1] >= intervals[i][0])
+        mergedElement[1] = Math.max(mergedElement[1],intervals[i][1]);
+    else{
+        out.add(mergedElement);
+        mergedElement = intervals[i];
+    }
+}
+out.add(mergedElement);
+return out.toArray(new int[out.size()][2]);
 ```
 [back to up](#List-of-Content)
 ---
