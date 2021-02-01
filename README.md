@@ -290,16 +290,6 @@ public int pickIndex() {
 - Key concepts:
 1. If the input intervals would be a sorted array with respect to the first element, the a linea search from the begining would determine all overlapping intervals.
 2. Therefore, O(n log n) would be the time complexity of the solution
-Example: 
-input: [2,5,1,4,2]
-accumulativeSum = [2,7,8,12,14]
-sample [1,2] -> idx = 0
-sample [3,7] -> idx = 1
-sample [8,8] -> idx = 2
-sample [9,12] -> idx = 3
-sample [13,14] -> idx = 4
-2. O(n) is the time complexity. O(n) for generating accumulativeSum, but the lookup is done by O(log n)
-- Solutions:
 ```ruby
 List<int[]> out = new ArrayList();
 Arrays.sort(intervals,(A, B)->A[0]-B[0]);
