@@ -14,6 +14,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Search in Rotated Sorted Array [(goto)](#Search-in-Rotated-Sorted-Array)
 ###### Random Pick with Weight [(goto)](#Random-Pick-with-Weight)
 ###### Merge Intervals [(goto)](#Merge-Intervals)
+###### Product of Array Except Self [(goto)](#Product-of-Array-Except-Self)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -304,6 +305,29 @@ for(int i=1;i<intervals.length;i++){
 }
 out.add(mergedElement);
 return out.toArray(new int[out.size()][2]);
+```
+[back to up](#List-of-Content)
+
+##### Product of Array Except Self
+- [Problem description and source](https://leetcode.com/problems/product-of-array-except-self/)
+- Key concepts:
+1. If two different arrays holds all the products of the left side and the right side of any elements, then by multiplying the lef[i] by right[i] the result would be generated.
+2. In a for loop, the left[] and the right[] arrays is generated.
+3. The better approach is to doing this in O(1) of memory complexity. Generates the left[] array in the result[] array as its default value. Then, keeping the right value from the end of array in a simple int variable and multiply result[i] (which is the left[] array) by right at each element.
+```ruby
+int right =1;
+int[] out = new int[nums.length];
+out[0] = 1;
+for(int i=1;i<nums.length;i++){
+    out[i] = out[i-1] * nums[i-1];
+}
+
+for(int i=nums.length-1;i>0;i--){
+    out[i] = out[i] * right;
+    right = right * nums[i];
+}
+out[0] = right;
+return out;
 ```
 [back to up](#List-of-Content)
 ---
