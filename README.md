@@ -330,6 +330,7 @@ out[0] = right;
 return out;
 ```
 [back to up](#List-of-Content)
+
 ---
 ## Hard Algorithms
 ##### Merge k Sorted List problem
