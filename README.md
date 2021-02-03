@@ -15,7 +15,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Random Pick with Weight [(goto)](#Random-Pick-with-Weight)
 ###### Merge Intervals [(goto)](#Merge-Intervals)
 ###### Product of Array Except Self [(goto)](#Product-of-Array-Except-Self)
-###### K Closest Points to Origin [(goto)](#KClosestPointstoOrigin)
+###### K Closest Points to Origin [(goto)](#K-Closest-Points-to-Origin)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -350,7 +350,7 @@ while(L < R){
         R = pIndex - 1;
     else
         L = pIndex + 1;
-}
+  }
 return Arrays.copyOfRange(points,0,K);
 }
 private int partition(int[][] points,int L, int R){
