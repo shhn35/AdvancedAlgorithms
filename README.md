@@ -15,6 +15,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Random Pick with Weight [(goto)](#Random-Pick-with-Weight)
 ###### Merge Intervals [(goto)](#Merge-Intervals)
 ###### Product of Array Except Self [(goto)](#Product-of-Array-Except-Self)
+###### K Closest Points to Origin [(goto)](#KClosestPointstoOrigin)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -328,6 +329,44 @@ for(int i=nums.length-1;i>0;i--){
 }
 out[0] = right;
 return out;
+```
+[back to up](#List-of-Content)
+
+##### K Closest Points to Origin
+- [Problem description and source](https://leetcode.com/problems/k-closest-points-to-origin/)
+- Key concepts:
+1- By adding each individual elements in a sorted array of size K, it will be assure that after a loop over all points, we have the Kth closest point. 
+But this approach requires us to use of either Arrays.Sort or a MaxHeap, while both methods has a complexity of o(n log n).
+2- So, for solving this problem in o(n), we can utilize the main property of QuickSelect algorithms, particularly the Partition algorithms, where after each run of Partition, the pivot is in its right place and also all smaller elements are placed before hand. So, if we kan find a pivot == k-1 then we know that all smallest K points are stored at the begining of the array up to K-1.
+```ruby
+int L = 0,
+    R = points.length-1,
+    pIndex=0;
+while(L < R){
+    pIndex = partition(points,L,R);
+    if(pIndex == K-1)
+        break;
+    else if(pIndex > K)
+        R = pIndex - 1;
+    else
+        L = pIndex + 1;
+}
+return Arrays.copyOfRange(points,0,K);
+}
+private int partition(int[][] points,int L, int R){
+    int pivot = distance(points[R]);
+    int pIndex = L;
+    for(int i=L; i<R; i++)
+        if(distance(points[i]) < pivot){
+            swap(points,i,pIndex);
+            pIndex++;
+        }
+    swap(points,pIndex,R);
+    return pIndex;
+}
+private int distance(int[] point){
+    return point[0] * point[0] + point[1] * point[1];
+}
 ```
 [back to up](#List-of-Content)
 
