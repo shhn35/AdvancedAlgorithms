@@ -16,6 +16,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Merge Intervals [(goto)](#Merge-Intervals)
 ###### Product of Array Except Self [(goto)](#Product-of-Array-Except-Self)
 ###### K Closest Points to Origin [(goto)](#K-Closest-Points-to-Origin)
+###### Top K Frequent Elements [(goto)](#Top-K-Frequent-Elements)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -367,6 +368,42 @@ private int partition(int[][] points,int L, int R){
 private int distance(int[] point){
     return point[0] * point[0] + point[1] * point[1];
 }
+```
+[back to up](#List-of-Content)
+
+##### Top K Frequent Elements
+- [Problem description and source](https://leetcode.com/problems/top-k-frequent-elements/)
+- Key concepts:
+1- Calculate the requency of all elements in a HashMap and add all unique elements into a list for furthur calculation.
+2- Unisng QuickSelect algorithms but, the comparision needs to be don by the frequency (HashMap) and the swap is done in unique elements list.
+3- the boundry of the quick select is a little tricky, in which the condition should be (if pIndex == uniqs.length - k) instead of (if pIndex == k)
+```ruby
+HashMap<Integer,Integer> freq = new HashMap();
+List<Integer> uniqList = new ArrayList<Integer>();
+for(int i=0;i<nums.length;i++){
+    if(!freq.containsKey(nums[i]))
+        uniqList.add(nums[i]);
+    freq.put(nums[i],(freq.getOrDefault(nums[i],0)+1));
+}
+
+int[] uniqs = new int[uniqList.size()];
+for(int i=0;i<uniqList.size();i++)
+    uniqs[i] = uniqList.get(i);
+
+int L = 0,
+    R = uniqs.length-1,
+    pIndex = 0;
+
+while(L<R){
+    pIndex = partition(freq,uniqs,L,R);
+    if(pIndex == uniqs.length - k)
+        break;
+    else if(pIndex < uniqs.length - k)
+        L = pIndex+1;
+    else
+        R = pIndex-1;
+}
+return Arrays.copyOfRange(uniqs,L,uniqs.length);
 ```
 [back to up](#List-of-Content)
 
