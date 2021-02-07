@@ -16,6 +16,8 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Merge Intervals [(goto)](#Merge-Intervals)
 ###### Product of Array Except Self [(goto)](#Product-of-Array-Except-Self)
 ###### K Closest Points to Origin [(goto)](#K-Closest-Points-to-Origin)
+###### Top K Frequent Elements [(goto)](#Top-K-Frequent-Elements)
+###### Interval List Intersections [(goto)](#Interval-List-Intersections)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
 
@@ -367,6 +369,70 @@ private int partition(int[][] points,int L, int R){
 private int distance(int[] point){
     return point[0] * point[0] + point[1] * point[1];
 }
+```
+[back to up](#List-of-Content)
+
+##### Top K Frequent Elements
+- [Problem description and source](https://leetcode.com/problems/top-k-frequent-elements/)
+- Key concepts:
+1- Calculate the requency of all elements in a HashMap and add all unique elements into a list for furthur calculation.
+2- Unisng QuickSelect algorithms but, the comparision needs to be don by the frequency (HashMap) and the swap is done in unique elements list.
+3- the boundry of the quick select is a little tricky, in which the condition should be (if pIndex == uniqs.length - k) instead of (if pIndex == k)
+```ruby
+HashMap<Integer,Integer> freq = new HashMap();
+List<Integer> uniqList = new ArrayList<Integer>();
+for(int i=0;i<nums.length;i++){
+    if(!freq.containsKey(nums[i]))
+        uniqList.add(nums[i]);
+    freq.put(nums[i],(freq.getOrDefault(nums[i],0)+1));
+}
+
+int[] uniqs = new int[uniqList.size()];
+for(int i=0;i<uniqList.size();i++)
+    uniqs[i] = uniqList.get(i);
+
+int L = 0,
+    R = uniqs.length-1,
+    pIndex = 0;
+
+while(L<R){
+    pIndex = partition(freq,uniqs,L,R);
+    if(pIndex == uniqs.length - k)
+        break;
+    else if(pIndex < uniqs.length - k)
+        L = pIndex+1;
+    else
+        R = pIndex-1;
+}
+return Arrays.copyOfRange(uniqs,L,uniqs.length);
+```
+[back to up](#List-of-Content)
+
+##### Interval List Intersections
+- [Problem description and source](https://leetcode.com/problems/interval-list-intersections/)
+- Key concepts:
+1- If Max(list1[i][0],list2[j][0]) <= Min(list1[i][1],list2[j][1]) then we have an intersection between ith interval from list1 and jth interval from list2.
+2- increase either i or j by one based on the smallest End coordinate.
+```ruby
+List<int[]> out = new ArrayList();
+int iIdx = 0;
+int jIdx = 0;
+int start,end;
+while(iIdx < firstList.length && jIdx < secondList.length){
+    start = Math.max(firstList[iIdx][0],secondList[jIdx][0]);
+    end = Math.min(firstList[iIdx][1],secondList[jIdx][1]);
+
+    if(start<=end){
+        // new intersect detected
+        out.add(new int[]{start,end});
+    }
+   if(firstList[iIdx][1] <= secondList[jIdx][1]){
+        iIdx++;
+    }else{
+        jIdx++;
+    }
+}
+return out.toArray(new int[out.size()][]);
 ```
 [back to up](#List-of-Content)
 
