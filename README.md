@@ -6,6 +6,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Two Sum problem [(goto)](#Two-Sum-problem)
 ###### Reverse Integer problem [(goto)](#Reverse-Integer)
 ###### Remove Duplicate in Sorted Array problem [(goto)](#Remove-Duplicat-in-Sorted-Array)
+###### Plus One [(goto)](#Plus-One)
 #### [Medium](#Medium-Algorithms)
 ###### Three Sum To Zero [(goto)](#Three-Sum-To-Zero-problem)
 ###### Subarray Sum Equals K [(goto)](#Subarray-Sum-Equals-K)
@@ -83,6 +84,36 @@ while(pointer < nums.length){
         pointer++;
     else
         nums[index++] = nums[pointer++];
+}
+return index;
+```
+[back to up](#List-of-Content)
+
+##### Plus One
+- [Problem description and source](https://leetcode.com/problems/plus-one/)
+- Key concepts:
+1. The only concern here is taking care of Carry in each digit. When no carry happens, it means the sum operation is finished and time to return.
+
+- Solutions:
+```ruby
+int i = digits.length -1;
+int sum = digits[i] + 1;
+int c = sum /10;
+digits[i--] = sum % 10;
+
+while(c>0 && i>=0){
+    sum = digits[i] + c;
+    c = sum /10;
+    digits[i--] = sum % 10;
+}
+
+if(c==0)
+    return digits;
+else{
+    int[] result = new int[digits.length + 1];
+    result[0] = c;
+    System.arraycopy(digits,0,result,1,digits.length);
+    return result;
 }
 return index;
 ```
