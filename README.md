@@ -21,6 +21,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Interval List Intersections [(goto)](#Interval-List-Intersections)
 #### [Hard](#Hard-Algorithms)
 ###### Merge k Sorted List [(goto)](#Merge-k-Sorted-List-problem)
+###### Minimum Window Substring [(goto)](#Minimum-Window-Substring)
 
 ---
 ## Easy Algorithms
@@ -492,3 +493,60 @@ while(qp.size() >0 )
 return head.next
 ```
 [back to up](#List-of-Content)
+
+##### Minimum Window Substring
+- [Problem description and source](https://leetcode.com/problems/minimum-window-substring/)
+- Key concepts:
+1. By using the _Sliding Window approach_, this problem can be solved in o(n) with constant storage usage.
+2. The idea is, to start with two pointer _l,r_ and increase _r_ untill all chartacters in _t_ are covered, then try to eliminate unnecessary chars by increasing _l_. In other word, when a valid substring is found (using increasing _r_), try to destroy it by increasing _l_.
+- Sliding Window approach:
+```ruby
+vector<int> map(128,0);
+int counter; // check whether the substring is valid
+int begin=0, end=0; //two pointers, one point to tail and one  head
+int minLen; //the length of substring
+
+for() { /* initialize the hash map here */ }
+
+while(end<s.size()){
+    if(map[s[end++]]-- ?){  /* modify counter here */ }
+
+    while(/* counter condition */){ 
+         /* update minLen here if finding minimum*/
+
+        //increase begin to make it invalid/valid again
+        if(map[s[begin++]]++ ?){ /*modify counter here*/ }
+    }  
+    /* update minLen here if finding maximum*/
+}
+return minLen;
+```
+
+- Solutions:
+```ruby
+int[] freq = new int[256];
+for(int i=0;i<t.length();i++){
+    freq[t.charAt(i)]++;
+}
+int l=0,r=0,start = 0,minLen = Integer.MAX_VALUE,totalChar = t.length();
+while(r<s.length()){
+    // Try to find a valid substring
+    if(freq[s.charAt(r++)]-- > 0)
+        totalChar--;
+
+    while(totalChar == 0){
+    // making the found substring invalid with the hope of eliminating unnecessary chars.
+        if((r-l) < minLen){
+        // Keep track of the minium found substring so far.
+            start = l;
+            minLen = r-l;
+        }
+
+        if(freq[s.charAt(l++)]++ == 0)
+            totalChar++;
+    }
+}
+return (minLen == Integer.MAX_VALUE ? "" : s.substring(start,start+minLen));
+```
+[back to up](#List-of-Content)
+
