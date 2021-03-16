@@ -7,6 +7,7 @@ Here some advanced algorithms based on [LeetCode](https://leetcode.com/problems)
 ###### Reverse Integer problem [(goto)](#Reverse-Integer)
 ###### Remove Duplicate in Sorted Array problem [(goto)](#Remove-Duplicat-in-Sorted-Array)
 ###### Plus One [(goto)](#Plus-One)
+###### Reverse Linked List [(goto)](#Reverse-Linked-List)
 #### [Medium](#Medium-Algorithms)
 ###### Three Sum To Zero [(goto)](#Three-Sum-To-Zero-problem)
 ###### Subarray Sum Equals K [(goto)](#Subarray-Sum-Equals-K)
@@ -117,6 +118,32 @@ else{
     return result;
 }
 return index;
+```
+[back to up](#List-of-Content)
+
+##### Reverse Linked List
+- [Problem description and source](https://leetcode.com/problems/reverse-linked-list/)
+- Key concepts:
+1. The brude force solution is to traverse the linked list and add the elements into a stack, then create a new linke list using that stack.
+2. However, it can be solved in o(n) with constant storage in _in-place swapping_ approach. 
+
+- Solutions:
+```ruby
+if(head == null)
+    return head;
+
+ListNode c,n,t;
+
+c = head;
+n = c.next;
+while(n != null){
+    t = n.next;
+    n.next = c;
+    c = n;
+    n = t;
+}
+head.next = null;
+return c;
 ```
 [back to up](#List-of-Content)
 
